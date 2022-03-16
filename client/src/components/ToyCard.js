@@ -1,7 +1,9 @@
 import React from "react";
+import { useState } from "react/cjs/react.production.min";
 
 function ToyCard({ toy, onDeleteToy, onUpdateToy }) {
-  const { id, name, image, likes } = toy;
+  const { id, name, image, likes } = toy
+  // const [errors, setError] = useState([])
 
   function handleDeleteClick() {
     fetch(`/toys/${id}`, {
@@ -9,6 +11,8 @@ function ToyCard({ toy, onDeleteToy, onUpdateToy }) {
     }).then((r) => {
       if (r.ok) {
         onDeleteToy(toy);
+      } else {
+        r.json().then(e => console.log(e))
       }
     });
   }
